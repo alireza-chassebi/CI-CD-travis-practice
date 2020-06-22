@@ -1,4 +1,4 @@
-FROM node:alpine as buildImage
+FROM node:alpine
 
 WORKDIR '/app'
 
@@ -16,5 +16,5 @@ FROM nginx
 
 EXPOSE 80
 
-COPY --from=buildImage '/app/build' '/usr/share/nginx/html'
+COPY --from=0 /app/build /usr/share/nginx/html
 
