@@ -9,15 +9,15 @@ before_install:
 
 script:
   - docker run -e CI=true alireza-chassebi/docker-react npm run test
-  #deploy
+#deploy if tests pass
 deploy:
   provider: elasticbeanstalk
   region: 'us-east-1'
   app: 'cicd_practice_travis'
   env: 'CicdPracticeTravis-env'
   bucket_name: 'elasticbeanstalk-us-east-1-372171239982'
-  bucket_path: 'cicd_practice_travis' # by default it creates the folder based on app name
-    on:
-  branch: master #anytime we push code to branch master redeploy
-  access_key_id: $AWS_ACCESS_KEY
+  bucket_path: 'cicd_practice_travis' # by default it creates the folder based on app name on first deployment
+  on:
+    branch: master #anytime we push code to branch master redeploy
+  access_key_id: $AWS_ACCESS_KEY # set in travis CI
   secret_access_key: $AWS_SECRET_KEY
