@@ -1,0 +1,22 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY ./ ./
+
+CMD ["npm" , "run" , "start"]
+
+#build image
+# docker build -f Dockerfile.dev .
+
+# create and start container
+# docker run -it -p 3000:3000 IMAGEID
+
+# create and start container with volume to prevent constant image rebuild on file change 
+# docker run -it -p 3000:3000 -v /app/node_modules -v $(pwd):/app IMAGEID
+
+# docker-compose up even shorter hand refer to docker-compose.yml
